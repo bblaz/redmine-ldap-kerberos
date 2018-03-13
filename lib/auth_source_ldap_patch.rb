@@ -6,7 +6,7 @@ module AuthSourceLdapPatch
     base.class_eval do
       def authenticate(login, password)
         return nil if login.blank? || password.blank?
-        attrs = get_user_dn(login)
+        attrs = get_user_dn(login, password)
         logger.debug "Attempting kerberos authentication for '#{login}'"
         krb5 = Krb5.new
         if attrs && attrs[:dn] && krb5.get_init_creds_password(login, password)
