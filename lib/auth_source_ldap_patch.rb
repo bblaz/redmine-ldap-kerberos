@@ -16,7 +16,7 @@ module AuthSourceLdapPatch
         rescue  Net::LDAP::LdapError => text
           raise "LdapError: " + text
         rescue Krb5Auth::Krb5::Exception => error
-          if error.message == "Decrypt integrity check failed"
+          if error.message == "Preauthentication failed"
             logger.debug "Incorrect password for #{login}"
             return nil
           else
